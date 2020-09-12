@@ -73,8 +73,8 @@
                             <div class="col-lg-8">
                                 <select name="denda" id="denda" class="form-control">
                                     <option></option>
-                                    <option value="Y">N</option>
-                                    <option value="N">Y</option>
+                                    <option value="N">N</option>
+                                    <option value="Y">Y</option>
                                 </select>
                             </div>
                         </div>
@@ -249,9 +249,9 @@ $(document).ready(function() {
     $("#denda").attr("disabled",true);
 
     //disable enabled combobox
-    $("#denda").click(function(){
-        var denda = $("#denda").val();
-        if(denda == "Y") {
+    $('#denda').change(function() {
+        var denda = $('#denda').val()
+        if(denda == "N") {
             $("#nominal").attr("disabled", true);
            
         }
@@ -259,8 +259,7 @@ $(document).ready(function() {
             $("#nominal").attr("disabled", false);
             
         }
-
-    });
+    })
 
     $("#simpan_transaksi").click(function(){
 
@@ -282,7 +281,6 @@ $(document).ready(function() {
             return false;
         }
         else if(denda == "Y"){
-            
             if(nominal2 == "") {
                 alert("Masukan nominal denda");
                 $("#nominal").focus();

@@ -160,7 +160,6 @@ $(document).ready(function() {
 
     //get data via ajax 
     $("#tampilkan").click(function(){
-
         var tanggal1 = $("#tanggal1").val();
         var tanggal2 = $("#tanggal2").val();
 

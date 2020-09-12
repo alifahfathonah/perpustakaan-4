@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label class="col-lg-4 ">Tgl Kembali</label>
                             <div class="col-lg-7">
-                                <input type="text" id="tgl_kembali" name="tgl_kembali" class="form-control" value="<?php echo $tglkembali; ?>" readonly="readonly">
+                                <input type="text" id="tgl_kembali" name="tgl_kembali" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -166,6 +166,9 @@
 <!-- Metis Menu Plugin JavaScript -->
 <script src="<?php echo base_url(); ?>template/backend/sbadmin/vendor/metisMenu/metisMenu.min.js"></script>
 
+<!-- Datepicker -->
+<script src="<?php echo base_url(); ?>template/backend/sbadmin/js/bootstrap-datepicker.js"></script>
+
 <!-- DataTables JavaScript -->
 <script src="<?php echo base_url(); ?>template/backend/sbadmin/vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>template/backend/sbadmin/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
@@ -184,6 +187,10 @@ $(document).ready(function() {
         responsive: true
     });
 
+
+    $("#tgl_kembali").datepicker({
+        format:'yyyy-mm-dd'
+    });
 
     //load data tmp 
     function loadData()

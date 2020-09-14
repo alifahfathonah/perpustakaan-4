@@ -102,7 +102,6 @@
         </div><!-- end panel -->
         <?php } ?>
         <?php if($this->session->userdata['role'] == "anggota") { ?>
-        <?php $totalDenda = 0; ?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <?php echo $title;?>
@@ -138,7 +137,6 @@
                             </thead>
                             <tbody>
                                 <?php foreach($listPengembalian as $lp) : ?>
-                                    <?php $totalDenda += $lp['nominal']; ?>
                                     <tr>
                                         <td><?= $lp['id_transaksi'] ?></td>
                                         <td><?= $lp['kode_buku'] ?></td>

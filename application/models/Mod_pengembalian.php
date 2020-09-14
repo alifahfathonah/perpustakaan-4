@@ -53,6 +53,7 @@ class Mod_pengembalian extends CI_Model {
         $this->db->join('transaksi', 'transaksi.id_transaksi = pengembalian.id_transaksi');
         $this->db->join('petugas', 'petugas.id_petugas = pengembalian.id_petugas');
         $this->db->where('transaksi.nis', $nis);
+        $this->db->where('transaksi.status', 'Y');
         return $this->db->get();
     }
 

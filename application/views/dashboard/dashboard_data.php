@@ -86,7 +86,7 @@
                             <?php } ?>
                             <?php if($this->session->userdata['role'] == "anggota") { ?>
                             <div class="col-xs-9 text-right">
-                                <div class="huge"><?=$this->db->get_where('transaksi', ['nis' => $this->session->userdata['username']])->num_rows();?></div>
+                                <div class="huge"><?=$this->db->get_where('transaksi', ['nis' => $this->session->userdata['username'], 'status' => 'N'])->num_rows();?></div>
                                 <div>Peminjaman!</div>
                             </div>
                             <?php } ?>
@@ -122,6 +122,7 @@
                                         $this->db->from('pengembalian');
                                         $this->db->join('transaksi', 'transaksi.id_transaksi = pengembalian.id_transaksi');
                                         $this->db->where('transaksi.nis', $this->session->userdata['username']);
+                                        $this->db->where('transaksi.status', 'Y');
                                         echo $this->db->get()->num_rows();
                                     ?>
                                 </div>

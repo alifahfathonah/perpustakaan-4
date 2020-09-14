@@ -17,6 +17,7 @@ class Pengembalian extends MY_Controller {
         $data['getDataAnggota'] = $this->Mod_anggota->cekAnggota($this->session->userdata['username'])->row_array();
         if($this->session->userdata['role'] == "anggota") {
             $data['listPengembalian'] = $this->listPengembalian()->result_array();
+            $data['totalDenda'] = $this->getTotalDenda();
         }
         $this->template->load('layoutbackend', 'pengembalian/pengembalian_data', $data);
     }
@@ -80,6 +81,16 @@ class Pengembalian extends MY_Controller {
         $nis = $this->session->userdata['username'];
         $results = $this->Mod_pengembalian->listPengembalian($nis);
         return $results;
+    }
+
+    public function getTotalDenda()
+    {
+        $results = $this->listPengembalian()->result_array();
+        $totalDenda = 0;
+        foreach ($results as $r) {
+            $totalDenda += $r['nominal'];
+        }
+        return $totalDenda;
     }
 
 }

@@ -70,6 +70,7 @@ class Mod_peminjaman extends CI_Model
         $this->db->from('transaksi');
         $this->db->join('petugas', 'petugas.id_petugas = transaksi.id_petugas');
         $this->db->where('transaksi.nis', $nis);
+        $this->db->where('transaksi.status', 'N');
         return $this->db->get();
     }
 

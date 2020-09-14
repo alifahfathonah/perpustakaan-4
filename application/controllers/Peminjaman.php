@@ -22,6 +22,10 @@ class Peminjaman extends MY_Controller {
     {
         $data['tmp']       = $this->Mod_peminjaman->getTmp()->result();
         $data['jumlahTmp'] = $this->Mod_peminjaman->jumlahTmp();
+        $data['getDataAnggota'] = $this->Mod_anggota->cekAnggota($this->session->userdata['username'])->row_array();
+        if($this->session->userdata['role'] == "anggota") {
+            $data['listPeminjaman'] = $this->listPinjamanAnggota();
+        }
         $this->load->view('peminjaman/peminjaman_tampil_tmp',$data);
     }
 
@@ -119,6 +123,14 @@ class Peminjaman extends MY_Controller {
             $this->Mod_peminjaman->deleteTmp($kode_buku);
            
         }
+    }
+
+    public function listPinjamanAnggota()
+    {
+        $nis = $this->session->userdata['username'];
+        $results = $this->Mod_peminjaman->getListPinjaman($nis)->result_array();
+        // var_dump($results);
+        return $results;
     }
 
 

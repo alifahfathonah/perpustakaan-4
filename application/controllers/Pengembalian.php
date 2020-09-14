@@ -7,12 +7,17 @@ class Pengembalian extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('Mod_pengembalian');
+        $this->load->model('Mod_anggota');
     }
 
 
     public function index()
     {
         $data['title'] = "Pengembalian Buku";
+        $data['getDataAnggota'] = $this->Mod_anggota->cekAnggota($this->session->userdata['username'])->row_array();
+        if($this->session->userdata['role'] == "anggota") {
+            $data['listPengembalian'] = $this->listPengembalian()->result_array();
+        }
         $this->template->load('layoutbackend', 'pengembalian/pengembalian_data', $data);
     }
 
@@ -68,6 +73,13 @@ class Pengembalian extends MY_Controller {
         );
 
         $this->Mod_pengembalian->UpdateStatus($no_transaksi, $data);
+    }
+
+    public function listPengembalian()
+    {
+        $nis = $this->session->userdata['username'];
+        $results = $this->Mod_pengembalian->listPengembalian($nis);
+        return $results;
     }
 
 }

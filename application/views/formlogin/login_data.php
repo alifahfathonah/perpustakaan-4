@@ -132,7 +132,7 @@
         </div>
     </div>
     <div class="col-md-8 ">
-        <h4> SISTEM INFORMASI PERPUSTAKAAN BERBASIS WEB</h4><hr class="line-title"> 
+        <h4 style="font-weight: bold;"> SISTEM INFORMASI PERPUSTAKAAN BERBASIS WEB</h4><hr class="line-title"> 
         <img src="<?php echo base_url(); ?>assets/img/banner/img-lib.jpg" alt="Belum Tersedia" class="img-responsive">
     </div>
 </div>

@@ -46,6 +46,15 @@ class Mod_pengembalian extends CI_Model {
         
     }
 
+    public function listPengembalian($nis)
+    {
+        $this->db->select("*");
+        $this->db->from('pengembalian');
+        $this->db->join('transaksi', 'transaksi.id_transaksi = pengembalian.id_transaksi');
+        $this->db->join('petugas', 'petugas.id_petugas = pengembalian.id_petugas');
+        $this->db->where('transaksi.nis', $nis);
+        return $this->db->get();
+    }
 
 }
 

@@ -11,6 +11,7 @@
 	</style>
 </head>
 <body onload="window.print()">
+<!-- <body> -->
 	<h1>Report Pengembalian</h1><hr>
 			<p style="float: right;">Cirebon, <?=date('d F Y') ?></p>
 			<div class="content">
@@ -26,8 +27,11 @@
 				            <td>ID Petugas</td>
 				        </tr>
 				    </thead>
-				    <?php $no=0; foreach($hasil_search->result() as $data): $no++;?>
+				    <?php $no=0; $nominal = 0; foreach($hasil_search->result() as $data): $no++;?>
 				    <tr>
+						<?php 
+						$nominal += $data->nominal;
+						?>
 				        <td><?php echo $no;?></td>
 				        <td><?php echo $data->id_transaksi;?></td>
 				        <td><?php echo $data->tgl_pengembalian;?></td>
@@ -35,7 +39,11 @@
 				        <td><?php echo $data->nominal; ?></td>
 				        <td><?php echo $data->full_name;?></td>
 				    </tr>
-				    <?php endforeach;?>
+					<?php endforeach;?>
+					<tr>
+						<th colspan="5">Total Denda</th>
+						<th>Rp. <?= $nominal; ?></th>
+					</tr>
 				</table>
 
 				<?php }else{ ?>

@@ -78,10 +78,18 @@
                             <div class="col-xs-3">
                                 <i class="fa  fa-share-square fa-5x"></i>
                             </div>
+                            <?php if($this->session->userdata['role'] == "admin") { ?>
                             <div class="col-xs-9 text-right">
                                 <div class="huge"><?=$this->db->get('transaksi')->num_rows();?></div>
                                 <div>Peminjaman!</div>
                             </div>
+                            <?php } ?>
+                            <?php if($this->session->userdata['role'] == "anggota") { ?>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><?=$this->db->get_where('transaksi', ['nis' => $this->session->userdata['username']])->num_rows();?></div>
+                                <div>Peminjaman!</div>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                     <a href="<?php echo base_url('peminjaman'); ?>">
@@ -100,10 +108,26 @@
                             <div class="col-xs-3">
                                 <i class="fa fa-check-square   fa-5x"></i>
                             </div>
+                            <?php if($this->session->userdata['role'] == "admin") { ?>
                             <div class="col-xs-9 text-right">
                                 <div class="huge"><?=$this->db->get('pengembalian')->num_rows();?></div>
                                 <div>Pengembalian!</div>
                             </div>
+                            <?php } ?>
+                            <?php if($this->session->userdata['role'] == "anggota") { ?>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">
+                                    <?php 
+                                        $this->db->select("*");
+                                        $this->db->from('pengembalian');
+                                        $this->db->join('transaksi', 'transaksi.id_transaksi = pengembalian.id_transaksi');
+                                        $this->db->where('transaksi.nis', $this->session->userdata['username']);
+                                        echo $this->db->get()->num_rows();
+                                    ?>
+                                </div>
+                                <div>Pengembalian!</div>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                     <a href="<?php echo base_url('pengembalian'); ?>">

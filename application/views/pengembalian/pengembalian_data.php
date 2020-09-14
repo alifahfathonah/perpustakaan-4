@@ -100,7 +100,66 @@
                 <button id="simpan_transaksi" class="btn btn-primary"><i class="glyphicon glyphicon-saved"></i> Simpan</button>
             </div>
         </div><!-- end panel -->
+        <?php } ?>
+        <?php if($this->session->userdata['role'] == "anggota") { ?>
+        <?php $totalDenda = 0; ?>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <?php echo $title;?>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <img src="<?= base_url('assets/img/anggota/'.$getDataAnggota['image']) ?>" class="img-responsive m-auto img-thumbnail" alt="Responsive image">
+                        </li>
+                        <li class="list-group-item">Nama : <?= $getDataAnggota['nama'] ?></li>
+                        <li class="list-group-item">NIS : <?= $getDataAnggota['nis'] ?></li>
+                        <li class="list-group-item">Jenis Kelamin : <?= $getDataAnggota['jk'] ?></li>
+                        <li class="list-group-item">TTL : <?= $getDataAnggota['ttl'] ?></li>
+                        <li class="list-group-item">Kelas : <?= $getDataAnggota['kelas'] ?></li>
+                        <li class="list-group-item">Total Denda : <?= $totalDenda ?></li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <h4>Buku yang sudah dikembalikan</h4>
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="listPinjaman">
+                            <thead>
+                                <tr>
+                                    <th>ID transaksi</th>
+                                    <th>Kode Buku</th>
+                                    <th>Tanggal Pengembalian</th>
+                                    <th>Denda</th>
+                                    <th>Petugas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($listPengembalian as $lp) : ?>
+                                    <?php $totalDenda += $lp['nominal']; ?>
+                                    <tr>
+                                        <td><?= $lp['id_transaksi'] ?></td>
+                                        <td><?= $lp['kode_buku'] ?></td>
+                                        <td><?= $lp['tgl_pengembalian'] ?></td>
+                                        <td><?= $lp['nominal'] ?></td>
+                                        <td><?= $lp['full_name'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                    <!-- <tr>
+                                        <th colspan="4">Total Denda </th>
+                                        <th><?= $totalDenda ?></th>
+                                    </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php } ?>
+
     </div> <!-- end lg -->
 </div> <!-- end row -->
 
@@ -163,6 +222,10 @@ $(document).ready(function() {
 
     //load datatable
     $('#dataTables-example').DataTable({
+        responsive: true
+    });
+
+    $('#listPinjaman').DataTable({
         responsive: true
     });
 

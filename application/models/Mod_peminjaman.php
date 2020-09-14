@@ -64,6 +64,15 @@ class Mod_peminjaman extends CI_Model
         return $this->db->get($this->table);
     }
 
+    function getListPinjaman($nis)
+    {
+        $this->db->select("*");
+        $this->db->from('transaksi');
+        $this->db->join('petugas', 'petugas.id_petugas = transaksi.id_petugas');
+        $this->db->where('transaksi.nis', $nis);
+        return $this->db->get();
+    }
+
 }
 
 /* End of file Mod_peminjaman.php */

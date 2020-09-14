@@ -75,7 +75,12 @@
         <!-- data buku -->
         <div class="panel panel-default">
             <div class="panel-heading">
+                <?php if($this->session->userdata['role'] == "admin") { ?>
                 <strong>Data Buku</strong>
+                <?php } ?>
+                <?php if($this->session->userdata['role'] == "anggota") { ?>
+                <strong>Data Buku <?= $this->session->userdata['full_name'] ?></strong>
+                <?php } ?>
             </div>
             
             <div class="panel-body">
